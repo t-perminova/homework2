@@ -9,55 +9,34 @@ public class Main {
 
     private float telescopePriceWithContribution() {
         return telescope - account;}
-
-    public static int countMonth(float total, float mortgageCosts, float percentBankYear) {
-        float percentBankMonth = percentBankYear / 12;
-        int count = 0;
-
-        while (total > 0) {
-            count++;
-
-            float telescope = 14_000; // стоимость телескопа
-            int account = 1_000; // счёт пользователя
-            float stipend = 2500; // ежемесячная стипендия
-            int percentFree = 100; // доля  стипендии на любые траты
-            float percentBank = 5; // годовая процентная ставка на накопления
-            float[] monthPayments = new float[120];
-        }
-            private float telescopePriceWithContribution() {
-                return telescopePrice - account;
-            }
-
-            public int countMonth(float total, float mortgageCosts, float percentBankYear){
+public float telescopeCosts(float amount, int percent) {
+        return (amount*percent)/100;
+}
+     public int countMonth(float total, float telescopeCosts, float percentBankYear){
                 float percentBankMonth = percentBankYear / 12;
                 int count = 0;
-
                 while (total > 0) {
                     count++;
-                    total = (total + (total * percentBankMonth) / 100) - mortgageCosts;
-                    if (total > mortgageCosts) {
-                        monthlyPayments[count - 1] = mortgageCosts;
+                    total = (total + (total*percentBankMonth) / 100) - telescopeCosts;
+
+                    if (total > telescopeCosts) {
+                        monthPayments[count - 1] = telescopeCosts;
                     } else {
-                        monthlyPayments[count - 1] = total;
+                        monthPayments[count - 1] = total;
                     }
                 }
-                if (total > mortgageCosts) {
-                    monthlyPayments[count - 1] = mortgageCosts;
-                } else {
-                    monthlyPayments[count - 1] = total;
-                }
+                return count;
             }
-        }
     public static void main(String[] args) {
         Main main = new Main();
-        System.out.println("Средства будут накапливаться " + countMonth(main.telescopePriceWithContribution), main.mortgageCosts(main.wage, main.percentFree), main.percentBank) + "месяцев");
+        System.out.println("Средства будут накапливаться " + main.countMonth(main.telescopePriceWithContribution(), main.telescopeCosts(main.stipend, main.percentFree), main.percentBank) + " месяцев");
         String monthlyPaymentsList = "";
-        for (float list : monthlyPayments) {
+        for (float list : monthPayments) {
             if(list>0) {
-                monthlyPaymentsList = monthlyPaymentsList + Float.toString(list) + "монет";}
+                monthlyPaymentsList = monthlyPaymentsList + Float.toString(list) + " монет ";}
             else {
                 break; }
         }
-        System.out.println("Первоначальный взнос " + account + "монет, ежемесячные выплаты: "+ monthlyPaymentsList);
+        System.out.println("Первоначальный взнос " + account + " монет, ежемесячные выплаты: "+ monthlyPaymentsList);
     }
     }
